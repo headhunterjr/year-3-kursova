@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Алгоритм Флойда-Воршалла";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Алгоритм Флойда-Воршалла</h1>
+
+    <form asp-action="SolveFloyd" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="excelFile">Обрати файл:</label>
+            <input type="file" id="excelFile" name="excelFile" accept=".xlsx" />
+        </div>
+        <button type="submit">Завантажити та розв'язати</button>
+    </form>
+
+    <div id="result">
+
+    </div>
+</div>
+
+<script src="~/js/floyd.js"></script>

@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Алгоритм Прима";
+}
+
+<div class="text-center">
+    <h1 class="display-4 custom-font">Алгоритм Прима</h1>
+
+    <form asp-action="SolvePrim" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="excelFile">Обрати файл:</label>
+            <input type="file" id="excelFile" name="excelFile" accept=".xlsx" />
+        </div>
+        <div>
+            <label for="sourceVertex">Початкова вершина:</label>
+            <input type="number" id="sourceVertex" name="sourceVertex" min="0" required />
+        </div>
+        <button type="submit">Завантажити та розв'язати</button>
+    </form>
+
+    <div id="result">
+
+    </div>
+</div>
+
+<script src="~/js/prim.js"></script>

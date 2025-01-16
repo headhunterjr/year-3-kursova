@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Алгоритм Дейкстри";
+}
+
+<div class="container">
+    <div class="algorithm-card">
+        <h1 class="algorithm-title">Алгоритм Дейкстри</h1>
+        <form asp-action="SolveDijkstra" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="form-label" for="excelFile">Обрати файл:</label>
+                <div class="file-upload">
+                    <input type="file" id="excelFile" name="excelFile" accept=".xlsx" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="sourceVertex">Початкова вершина</label>
+                <input type="number" id="sourceVertex" name="sourceVertex" min="0" required class="form-control" />
+            </div>
+            <button type="submit" class="btn-primary">Завантажити та розв'язати</button>
+        </form>
+        <div id="result">
+
+        </div>
+    </div>
+</div>
+<script src="~/js/dijkstra.js"></script>
