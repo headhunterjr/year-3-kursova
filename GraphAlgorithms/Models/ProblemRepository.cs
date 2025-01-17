@@ -101,7 +101,7 @@ namespace GraphAlgorithms.Models
 
             return lengths;
         }
-        public int[,] Floyd(int[,] graph, int sourceVertex, int endVertex)
+        public int[,] Floyd(int[,] graph)
         {
             int verticesCount = graph.GetLength(0);
             int[,] dist = new int[verticesCount, verticesCount];

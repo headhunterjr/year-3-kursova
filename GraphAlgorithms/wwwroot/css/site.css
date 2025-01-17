@@ -133,3 +133,10 @@ body {
 .custom-font {
     font-family: 'CustomFont', sans-serif;
 }
+
+.matrix-input-table td input {
+    width: 60px;
+    text-align: center;
+    padding: 5px;
+    font-size: 14px;
+}
