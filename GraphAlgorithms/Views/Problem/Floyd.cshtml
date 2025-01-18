@@ -6,9 +6,9 @@
     <h1 class="display-4">Алгоритм Флойда-Воршалла</h1>
 
     <select id="inputMethod">
-        <option value="" disabled selected>Choose Input Method</option>
-        <option value="excel">Upload Excel File</option>
-        <option value="manual">Enter Matrix Manually</option>
+        <option value="" disabled selected>Оберіть спосіб задання графу</option>
+        <option value="excel">Завантажити таблицю</option>
+        <option value="manual">Ввести матрицю суміжності вручну</option>
     </select>
 
 
@@ -27,7 +27,7 @@
 
         <form id="manualForm" asp-action="SolveFloydManual" method="post" style="display: none;">
             <div id="matrixInputs"></div>
-            <button type="submit">Solve</button>
+            <button type="submit">Обчислити</button>
         </form>
     </div>
 

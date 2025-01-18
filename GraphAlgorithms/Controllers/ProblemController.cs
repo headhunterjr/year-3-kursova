@@ -132,17 +132,73 @@ namespace GraphAlgorithms.Controllers
                     }
                 }
 
-                var result = _problemRepository.Floyd(processedMatrix);
-                Problem problem = new Problem
+                if (Validation.ValidateDirectedGraph(processedMatrix))
                 {
-                    Algorithm = Algorithms.Floyd,
-                    DataSize = processedMatrix.GetLength(0),
-                    ExcelUsed = false,
-                    TimeOfIssue = DateTime.UtcNow,
-                    Status = "Completed",
-                };
-                await _problemRepository.AddProblemAsync(problem);
-                return Ok(result);
+                    var result = _problemRepository.Floyd(processedMatrix);
+                    Problem problem = new Problem
+                    {
+                        Algorithm = Algorithms.Floyd,
+                        DataSize = processedMatrix.GetLength(0),
+                        ExcelUsed = false,
+                        TimeOfIssue = DateTime.UtcNow,
+                        Status = "Completed",
+                    };
+                    await _problemRepository.AddProblemAsync(problem);
+                    return Ok(result);
+                }
+                else
+                {
+                    throw new InvalidOperationException("Invalid data.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SolveDijkstraManual([FromForm] int?[][] matrix, int sourceVertex)
+        {
+            try
+            {
+                if (matrix == null || matrix.Length == 0)
+                {
+                    return BadRequest("Matrix cannot be empty.");
+                }
+
+                if (sourceVertex < 0 || sourceVertex >= matrix.GetLength(0))
+                {
+                    return BadRequest("Invalid start or end vertex.");
+                }
+
+                int[,] processedMatrix = new int[matrix.Length, matrix.Length];
+                for (int i = 0; i < matrix.Length; i++)
+                {
+                    for (int j = 0; j < matrix[i].Length; j++)
+                    {
+                        processedMatrix[i, j] = matrix[i][j] ?? int.MaxValue;
+                    }
+                }
+
+                if (Validation.ValidateUndirectedGraph(processedMatrix))
+                {
+                    var result = _problemRepository.Dijkstra(processedMatrix, sourceVertex);
+                    Problem problem = new Problem
+                    {
+                        Algorithm = Algorithms.Dijkstra,
+                        DataSize = processedMatrix.GetLength(0),
+                        ExcelUsed = false,
+                        TimeOfIssue = DateTime.UtcNow,
+                        Status = "Completed",
+                    };
+                    await _problemRepository.AddProblemAsync(problem);
+                    return Ok(result);
+                }
+                else
+                {
+                    throw new InvalidOperationException("Invalid data.");
+                }
             }
             catch (Exception ex)
             {

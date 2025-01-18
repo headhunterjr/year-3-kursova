@@ -2,25 +2,41 @@
     ViewData["Title"] = "Алгоритм Дейкстри";
 }
 
-<div class="container">
-    <div class="algorithm-card">
-        <h1 class="algorithm-title">Алгоритм Дейкстри</h1>
-        <form asp-action="SolveDijkstra" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label class="form-label" for="excelFile">Обрати файл:</label>
-                <div class="file-upload">
-                    <input type="file" id="excelFile" name="excelFile" accept=".xlsx" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="sourceVertex">Початкова вершина</label>
-                <input type="number" id="sourceVertex" name="sourceVertex" min="0" required class="form-control" />
-            </div>
-            <button type="submit" class="btn-primary">Завантажити та розв'язати</button>
-        </form>
-        <div id="result">
+<div class="text-center">
+    <h1 class="algorithm-title">Алгоритм Дейкстри</h1>
+    <select id="inputMethod">
+        <option value="" disabled selected>Оберіть спосіб задання графу</option>
+        <option value="excel">Завантажити таблицю</option>
+        <option value="manual">Ввести матрицю суміжності вручну</option>
+    </select>
 
+    <form id="excelForm" asp-action="SolveDijkstra" method="post" enctype="multipart/form-data" style="display: none;">
+        <div class="form-group">
+            <label class="form-label" for="excelFile">Обрати файл:</label>
+            <div class="file-upload">
+                <input type="file" id="excelFile" name="excelFile" accept=".xlsx" class="form-control" />
+            </div>
         </div>
+        <div class="form-group">
+            <label class="form-label" for="sourceVertex">Початкова вершина</label>
+            <input type="number" id="sourceVertex" name="sourceVertex" min="0" required class="form-control" />
+        </div>
+        <button type="submit" class="btn-primary">Завантажити та розв'язати</button>
+    </form>
+
+    <div id="manualMatrixForm" style="display: none;">
+        <label for="matrixSize">Кількість вершин графа:</label>
+        <input type="number" id="matrixSize" name="matrixSize" min="1" required />
+        <button id="generateMatrix">Створити матрицю</button>
+
+        <form id="manualForm" asp-action="SolveDijkstraManual" method="post" style="display: none;">
+            <div id="matrixInputs"></div>
+            <button type="submit">Обчислити</button>
+        </form>
+    </div>
+
+    <div id="result">
+
     </div>
 </div>
 <script src="~/js/dijkstra.js"></script>

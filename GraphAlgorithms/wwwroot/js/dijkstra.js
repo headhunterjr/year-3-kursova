@@ -1,25 +1,142 @@
 ﻿document.addEventListener('DOMContentLoaded', () => {
+    const inputMethod = document.getElementById('inputMethod');
+    const excelForm = document.getElementById('excelForm');
+    const manualMatrixForm = document.getElementById('manualMatrixForm');
+    const matrixSizeInput = document.getElementById('matrixSize');
+    const generateMatrixBtn = document.getElementById('generateMatrix');
+    const manualForm = document.getElementById('manualForm');
+    const matrixInputsDiv = document.getElementById('matrixInputs');
+    const resultDiv = document.getElementById('result');
 
-    const form = document.querySelector('form');
-    form.addEventListener('submit', async (event) => {
+    inputMethod.addEventListener('change', () => {
+        resultDiv.innerHTML = '';
+        const method = inputMethod.value;
+        excelForm.style.display = method === 'excel' ? 'block' : 'none';
+        manualMatrixForm.style.display = method === 'manual' ? 'block' : 'none';
+    });
+
+    excelForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const formData = new FormData(form);
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: formData,
-        });
+        const formData = new FormData(excelForm);
 
-        const resultDiv = document.getElementById('result');
-        if (response.ok) {
-            const result = await response.json();
-            const gridHtml = result.map((distance, index) =>
-                `<div class="result-item">Вершина ${index}: ${distance}</div>`
-            ).join('');
-            resultDiv.innerHTML = `<div class="result-grid">${gridHtml}</div>`;
-        } else {
-            const error = await response.text();
-            resultDiv.innerHTML = `<p>Error: ${error}</p>`;
+        try {
+            const response = await fetch(excelForm.action, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const distances = await response.json();
+                renderDistances(distances);
+            } else {
+                const error = await response.text();
+                resultDiv.innerHTML = `<p>Error: ${error}</p>`;
+            }
+        } catch (err) {
+            console.error('JavaScript error:', err);
+            resultDiv.innerHTML = `<p>Error: ${err.message}</p>`;
         }
     });
+
+    generateMatrixBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        const size = parseInt(matrixSizeInput.value);
+        if (isNaN(size) || size <= 0) {
+            alert('Please enter a valid matrix size.');
+            return;
+        }
+
+        matrixInputsDiv.innerHTML = '';
+        manualForm.style.display = 'block';
+
+        let html = '<table class="matrix-input-table" style="border-collapse: collapse; text-align: center;">';
+        html += '<thead><tr><th>Vertices</th>';
+        for (let i = 0; i < size; i++) {
+            html += `<th>${i}</th>`;
+        }
+        html += '</tr></thead>';
+        html += '<tbody>';
+        for (let i = 0; i < size; i++) {
+            html += `<tr><th>${i}</th>`;
+            for (let j = 0; j < size; j++) {
+                html += `<td>
+                    <input type="number" 
+                           name="matrix[${i}][${j}]" 
+                           data-row="${i}" 
+                           data-col="${j}" 
+                           min="0" 
+                           value="${i === j ? '0' : ''}" 
+                           ${i === j ? 'readonly' : ''} />
+                 </td>`;
+            }
+            html += '</tr>';
+        }
+        html += '</tbody>';
+        html += '</table>';
+        matrixInputsDiv.innerHTML = html;
+
+        const inputs = matrixInputsDiv.querySelectorAll('input[type="number"]');
+        inputs.forEach(input => {
+            input.addEventListener('input', (event) => {
+                const row = parseInt(event.target.dataset.row);
+                const col = parseInt(event.target.dataset.col);
+                const value = event.target.value;
+
+                const symmetricInput = matrixInputsDiv.querySelector(
+                    `input[data-row="${col}"][data-col="${row}"]`
+                );
+                if (symmetricInput) {
+                    symmetricInput.value = value;
+                }
+            });
+        });
+    });
+
+
+    manualForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const disabledInputs = manualForm.querySelectorAll('input:disabled');
+        disabledInputs.forEach(input => input.disabled = false);
+
+        const formData = new FormData(manualForm);
+
+        try {
+            const response = await fetch(manualForm.action, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const distances = await response.json();
+                renderDistances(distances);
+            } else {
+                const error = await response.text();
+                console.error("Server Error Response:", error);
+                resultDiv.innerHTML = `<p>Error: ${error}</p>`;
+            }
+        } catch (err) {
+            console.error('JavaScript error:', err);
+            resultDiv.innerHTML = `<p>Error: ${err.message}</p>`;
+        } finally {
+            disabledInputs.forEach(input => input.disabled = true);
+        }
+    });
+
+    function renderDistances(distances) {
+        if (!Array.isArray(distances)) {
+            resultDiv.innerHTML = `<p>Error: Invalid data received</p>`;
+            return;
+        }
+
+        let html = `<h3>Shortest Distances from Source Vertex:</h3>`;
+        html += `<ul>`;
+        distances.forEach((distance, vertex) => {
+            html += `<li>To Vertex ${vertex}: ${distance}</li>`;
+        });
+        html += `</ul>`;
+
+        resultDiv.innerHTML = html;
+    }
 });
