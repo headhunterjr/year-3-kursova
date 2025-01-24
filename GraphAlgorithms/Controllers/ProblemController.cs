@@ -30,7 +30,7 @@ namespace GraphAlgorithms.Controllers
         {
             if (excelFile == null || excelFile.Length == 0)
             {
-                return BadRequest("Please upload a valid file");
+                return BadRequest("Неналежний формат файлу.");
             }
 
             try
@@ -38,7 +38,7 @@ namespace GraphAlgorithms.Controllers
                 int[,] matrix = _problemRepository.ReadExcelToMatrix(excelFile);
                 if (sourceVertex < 0 || sourceVertex >= matrix.GetLength(0))
                 {
-                    return BadRequest("Invalid start or end vertex.");
+                    return BadRequest("Введіть дійсну початкову вершину.");
                 }
                 if (Validation.ValidateUndirectedGraph(matrix))
                 {
@@ -56,7 +56,7 @@ namespace GraphAlgorithms.Controllers
                 }
                 else
                 {
-                    throw new InvalidOperationException("Invalid data.");
+                    throw new InvalidOperationException("Недійсні дані.");
                 }
             }
             catch (FormatException ex)
@@ -67,7 +67,7 @@ namespace GraphAlgorithms.Controllers
             {
                 Console.WriteLine($"Error: {ex.Message}");
                 Console.WriteLine($"Stack Trace: {ex.StackTrace}");
-                return StatusCode(500, "An error occurred while processing the file.");
+                return StatusCode(500, "Під час оброблення файлу сталася помилка.");
             }
         }
 
@@ -76,7 +76,7 @@ namespace GraphAlgorithms.Controllers
         {
             if (excelFile == null || excelFile.Length == 0)
             {
-                return BadRequest("Please upload a valid file");
+                return BadRequest("Неналежний формат файлу.");
             }
 
             try
@@ -98,7 +98,7 @@ namespace GraphAlgorithms.Controllers
                 }
                 else
                 {
-                    throw new InvalidOperationException("Invalid data.");
+                    throw new InvalidOperationException("Недійсні дані.");
                 }
             }
             catch (FormatException ex)
@@ -109,7 +109,65 @@ namespace GraphAlgorithms.Controllers
             {
                 Console.WriteLine($"Error: {ex.Message}");
                 Console.WriteLine($"Stack Trace: {ex.StackTrace}");
-                return StatusCode(500, "An error occurred while processing the file.");
+                return StatusCode(500, "Під час оброблення файлу сталася помилка.");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SolvePrim(IFormFile excelFile, int sourceVertex)
+        {
+            if (excelFile == null || excelFile.Length == 0)
+            {
+                return BadRequest("Неналежний формат файлу.");
+            }
+
+            try
+            {
+                int[,] matrix = _problemRepository.ReadExcelToMatrix(excelFile);
+                if (sourceVertex < 0 || sourceVertex >= matrix.GetLength(0))
+                {
+                    return BadRequest("Введіть дійсну початкову вершину.");
+                }
+                if (Validation.ValidateUndirectedGraph(matrix))
+                {
+                    List<(int, int, int)> result = _problemRepository.Prim(matrix, sourceVertex);
+                    Problem problem = new Problem
+                    {
+                        Algorithm = Algorithms.Prim,
+                        DataSize = matrix.GetLength(0),
+                        ExcelUsed = true,
+                        TimeOfIssue = DateTime.UtcNow,
+                        Status = "Completed",
+                    };
+                    await _problemRepository.AddProblemAsync(problem);
+
+                    var mstEdges = result.Select(edge => new
+                    {
+                        Source = edge.Item1,
+                        Destination = edge.Item2,
+                        Weight = edge.Item3
+                    }).ToList();
+
+                    return Ok(new { originalMatrix = matrix, mstEdges });
+                }
+                else
+                {
+                    throw new InvalidOperationException("Недійсні дані.");
+                }
+            }
+            catch (FormatException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+                return StatusCode(500, "Під час оброблення файлу сталася помилка.");
             }
         }
 
@@ -120,7 +178,7 @@ namespace GraphAlgorithms.Controllers
             {
                 if (matrix == null || matrix.Length == 0)
                 {
-                    return BadRequest("Matrix cannot be empty.");
+                    return BadRequest("Матриця не може бути порожньою.");
                 }
 
                 int[,] processedMatrix = new int[matrix.Length, matrix.Length];
@@ -148,12 +206,12 @@ namespace GraphAlgorithms.Controllers
                 }
                 else
                 {
-                    throw new InvalidOperationException("Invalid data.");
+                    throw new InvalidOperationException("Недійсні дані.");
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"An error occurred: {ex.Message}");
+                return StatusCode(500, $"Сталася помилка: {ex.Message}");
             }
         }
 
@@ -164,12 +222,12 @@ namespace GraphAlgorithms.Controllers
             {
                 if (matrix == null || matrix.Length == 0)
                 {
-                    return BadRequest("Matrix cannot be empty.");
+                    return BadRequest("Матриця не може бути порожньою.");
                 }
 
                 if (sourceVertex < 0 || sourceVertex >= matrix.GetLength(0))
                 {
-                    return BadRequest("Invalid start or end vertex.");
+                    return BadRequest("Введіть дійсну початкову вершину.");
                 }
 
                 int[,] processedMatrix = new int[matrix.Length, matrix.Length];
@@ -197,38 +255,47 @@ namespace GraphAlgorithms.Controllers
                 }
                 else
                 {
-                    throw new InvalidOperationException("Invalid data.");
+                    throw new InvalidOperationException("Недійсні дані.");
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"An error occurred: {ex.Message}");
+                return StatusCode(500, $"Сталася помилка: {ex.Message}");
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> SolvePrim(IFormFile excelFile, int sourceVertex)
+        public async Task<IActionResult> SolvePrimManual([FromForm] int?[][] matrix, int sourceVertex)
         {
-            if (excelFile == null || excelFile.Length == 0)
-            {
-                return BadRequest("Please upload a valid file");
-            }
-
             try
             {
-                int[,] matrix = _problemRepository.ReadExcelToMatrix(excelFile);
+                if (matrix == null || matrix.Length == 0)
+                {
+                    return BadRequest("Матриця не може бути порожньою.");
+                }
+
                 if (sourceVertex < 0 || sourceVertex >= matrix.GetLength(0))
                 {
-                    return BadRequest("Invalid start or end vertex.");
+                    return BadRequest("Введіть дійсну початкову вершину.");
                 }
-                if (Validation.ValidateUndirectedGraph(matrix))
+
+                int[,] processedMatrix = new int[matrix.Length, matrix.Length];
+                for (int i = 0; i < matrix.Length; i++)
                 {
-                    List<(int, int, int)> result = _problemRepository.Prim(matrix, sourceVertex);
+                    for (int j = 0; j < matrix[i].Length; j++)
+                    {
+                        processedMatrix[i, j] = matrix[i][j] ?? int.MaxValue;
+                    }
+                }
+
+                if (Validation.ValidateUndirectedGraph(processedMatrix))
+                {
+                    List<(int, int, int)> result = _problemRepository.Prim(processedMatrix, sourceVertex);
                     Problem problem = new Problem
                     {
                         Algorithm = Algorithms.Prim,
-                        DataSize = matrix.GetLength(0),
-                        ExcelUsed = true,
+                        DataSize = processedMatrix.GetLength(0),
+                        ExcelUsed = false,
                         TimeOfIssue = DateTime.UtcNow,
                         Status = "Completed",
                     };
@@ -241,22 +308,16 @@ namespace GraphAlgorithms.Controllers
                         Weight = edge.Item3
                     }).ToList();
 
-                    return Ok(new {originalMatrix = matrix, mstEdges});
+                    return Ok(new { originalMatrix = matrix, mstEdges });
                 }
                 else
                 {
-                    throw new InvalidOperationException("Invalid data.");
+                    throw new InvalidOperationException("Недійсні дані.");
                 }
-            }
-            catch (FormatException ex)
-            {
-                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
-                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
-                return StatusCode(500, "An error occurred while processing the file.");
+                return StatusCode(500, $"Сталася помилка: {ex.Message}");
             }
         }
 

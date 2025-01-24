@@ -31,11 +31,11 @@
                 renderDistances(distances);
             } else {
                 const error = await response.text();
-                resultDiv.innerHTML = `<p>Error: ${error}</p>`;
+                resultDiv.innerHTML = `<p>Помилка: ${error}</p>`;
             }
         } catch (err) {
             console.error('JavaScript error:', err);
-            resultDiv.innerHTML = `<p>Error: ${err.message}</p>`;
+            resultDiv.innerHTML = `<p>Помилка: ${err.message}</p>`;
         }
     });
 
@@ -43,7 +43,7 @@
         event.preventDefault();
         const size = parseInt(matrixSizeInput.value);
         if (isNaN(size) || size <= 0) {
-            alert('Please enter a valid matrix size.');
+            alert('Введіть дійсну розмірність матриці.');
             return;
         }
 
@@ -114,11 +114,11 @@
             } else {
                 const error = await response.text();
                 console.error("Server Error Response:", error);
-                resultDiv.innerHTML = `<p>Error: ${error}</p>`;
+                resultDiv.innerHTML = `<p>Помилка: ${error}</p>`;
             }
         } catch (err) {
             console.error('JavaScript error:', err);
-            resultDiv.innerHTML = `<p>Error: ${err.message}</p>`;
+            resultDiv.innerHTML = `<p>Помилка: ${err.message}</p>`;
         } finally {
             disabledInputs.forEach(input => input.disabled = true);
         }
@@ -126,14 +126,14 @@
 
     function renderDistances(distances) {
         if (!Array.isArray(distances)) {
-            resultDiv.innerHTML = `<p>Error: Invalid data received</p>`;
+            resultDiv.innerHTML = `<p>Помилка: отримано недійсні дані.</p>`;
             return;
         }
 
-        let html = `<h3>Shortest Distances from Source Vertex:</h3>`;
+        let html = `<h3>Найкоротші шляхи від початкової вершини:</h3>`;
         html += `<ul>`;
         distances.forEach((distance, vertex) => {
-            html += `<li>To Vertex ${vertex}: ${distance}</li>`;
+            html += `<li>До вершини ${vertex}: ${distance}</li>`;
         });
         html += `</ul>`;
 

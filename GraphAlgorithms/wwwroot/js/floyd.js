@@ -32,11 +32,11 @@
                 renderMatrix(matrix);
             } else {
                 const error = await response.text();
-                resultDiv.innerHTML = `<p>Error: ${error}</p>`;
+                resultDiv.innerHTML = `<p>Помилка: ${error}</p>`;
             }
         } catch (err) {
             console.error('JavaScript error:', err);
-            resultDiv.innerHTML = `<p>Error: ${err.message}</p>`;
+            resultDiv.innerHTML = `<p>Помилка: ${err.message}</p>`;
         }
     });
 
@@ -44,7 +44,7 @@
         event.preventDefault();
         const size = parseInt(matrixSizeInput.value);
         if (isNaN(size) || size <= 0) {
-            alert('Please enter a valid matrix size.');
+            alert('Введіть дійсну розмірність матриці.');
             return;
         }
 
@@ -97,11 +97,11 @@
             } else {
                 const error = await response.text();
                 console.error("Server Error Response:", error);
-                resultDiv.innerHTML = `<p>Error: ${error}</p>`;
+                resultDiv.innerHTML = `<p>Помилка: ${error}</p>`;
             }
         } catch (err) {
             console.error('JavaScript error:', err);
-            resultDiv.innerHTML = `<p>Error: ${err.message}</p>`;
+            resultDiv.innerHTML = `<p>Помилка: ${err.message}</p>`;
         } finally {
             disabledInputs.forEach(input => input.disabled = true);
         }
@@ -113,7 +113,7 @@
         tableHtml += `
         <thead>
             <tr>
-                <th>Vertices</th>
+                <th>Вершини</th>
                 ${matrix[0].map((_, index) => `<th>${index}</th>`).join('')}
             </tr>
         </thead>`;

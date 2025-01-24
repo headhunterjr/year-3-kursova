@@ -3,23 +3,43 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4 custom-font">Алгоритм Прима</h1>
+    <h1 class="algorithm-title">Алгоритм Прима</h1>
+    <select id="inputMethod">
+        <option value="" disabled selected>Оберіть спосіб задання графу</option>
+        <option value="excel">Завантажити таблицю</option>
+        <option value="manual">Ввести матрицю суміжності вручну</option>
+    </select>
 
-    <form asp-action="SolvePrim" method="post" enctype="multipart/form-data">
-        <div>
-            <label for="excelFile">Обрати файл:</label>
-            <input type="file" id="excelFile" name="excelFile" accept=".xlsx" />
+    <form id="excelForm" asp-action="SolvePrim" method="post" enctype="multipart/form-data" style="display: none;">
+        <div class="form-group">
+            <label class="form-label" for="excelFile">Обрати файл:</label>
+            <div class="file-upload">
+                <input type="file" id="excelFile" name="excelFile" accept=".xlsx" class="form-control" />
+            </div>
         </div>
-        <div>
-            <label for="sourceVertex">Початкова вершина:</label>
-            <input type="number" id="sourceVertex" name="sourceVertex" min="0" required />
+        <div class="form-group">
+            <label class="form-label" for="sourceVertexFile">Початкова вершина:</label>
+            <input type="number" id="sourceVertexFile" name="sourceVertex" min="0" required class="form-control" />
         </div>
-        <button type="submit">Завантажити та розв'язати</button>
+        <button type="submit" class="btn-primary">Завантажити та розв'язати</button>
     </form>
 
-    <div id="result">
+    <div id="manualMatrixForm" style="display: none;">
+        <label for="matrixSize">Кількість вершин графа:</label>
+        <input type="number" id="matrixSize" name="matrixSize" min="1" required />
+        <button id="generateMatrix">Створити матрицю</button>
 
+        <form id="manualForm" asp-action="SolvePrimManual" method="post" style="display: none;">
+            <div id="matrixInputs"></div>
+            <div>
+                <label class="form-label" for="sourceVertexManual">Початкова вершина:</label>
+                <input type="number" id="sourceVertexManual" name="sourceVertex" min="0" required class="form-control" />
+            </div>
+            <button type="submit" class="btn-primary">Обчислити</button>
+        </form>
     </div>
+
+    <div id="result"></div>
 </div>
 
 <script src="~/js/prim.js"></script>
