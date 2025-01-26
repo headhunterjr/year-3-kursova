@@ -31,6 +31,10 @@
 
         <form id="manualForm" asp-action="SolveDijkstraManual" method="post" style="display: none;">
             <div id="matrixInputs"></div>
+            <div class="form-group">
+                <label class="form-label" for="sourceVertex">Початкова вершина</label>
+                <input type="number" id="sourceVertex" name="sourceVertex" min="0" required class="form-control" />
+            </div>
             <button type="submit">Обчислити</button>
         </form>
     </div>

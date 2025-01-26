@@ -134,7 +134,7 @@
             tableHtml += `<th style="border: 1px solid black; padding: 5px;">${i}</th>`;
         }
         tableHtml += "</tr>";
-        
+
         for (let i = 0; i < matrix.length; i++) {
             tableHtml += `<tr><th style="border: 1px solid black; padding: 5px;">${i}</th>`;
             for (let j = 0; j < matrix[i].length; j++) {
@@ -142,7 +142,7 @@
                 const edgeKey = `${i}-${j}`;
                 const isHighlighted = mstEdges.has(edgeKey);
                 const cellStyle = isHighlighted ? "background-color: red;" : "";
-                const displayValue = (weight !== 0 && weight < 1000000) ? weight : "";
+                const displayValue = weight && weight < 1000000 ? weight : "";
                 tableHtml += `<td style="border: 1px solid black; padding: 5px; text-align: center; ${cellStyle}">${displayValue}</td>`;
             }
             tableHtml += "</tr>";
