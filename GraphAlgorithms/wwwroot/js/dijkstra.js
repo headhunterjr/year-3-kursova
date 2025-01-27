@@ -18,6 +18,13 @@
     excelForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
+        const submitButton = excelForm.querySelector('button[type="submit"]');
+        let originalButtonText = "";
+        if (submitButton) {
+            submitButton.disabled = true;
+            originalButtonText = submitButton.textContent;
+            submitButton.textContent = "Зачекайте...";
+        }
         const formData = new FormData(excelForm);
 
         try {
@@ -36,6 +43,11 @@
         } catch (err) {
             console.error('JavaScript error:', err);
             resultDiv.innerHTML = `<p>Помилка: ${err.message}</p>`;
+        } finally {
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            }
         }
     });
 
@@ -51,7 +63,7 @@
         manualForm.style.display = 'block';
 
         let html = '<table class="matrix-input-table" style="border-collapse: collapse; text-align: center;">';
-        html += '<thead><tr><th>Vertices</th>';
+        html += '<thead><tr><th>Вершини</th>';
         for (let i = 0; i < size; i++) {
             html += `<th>${i}</th>`;
         }
@@ -93,13 +105,19 @@
         });
     });
 
-
     manualForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const disabledInputs = manualForm.querySelectorAll('input:disabled');
         disabledInputs.forEach(input => input.disabled = false);
 
+        const submitButton = manualForm.querySelector('button[type="submit"]');
+        let originalButtonText = "";
+        if (submitButton) {
+            submitButton.disabled = true;
+            originalButtonText = submitButton.textContent;
+            submitButton.textContent = "Зачекайте...";
+        }
         const formData = new FormData(manualForm);
 
         try {
@@ -121,6 +139,10 @@
             resultDiv.innerHTML = `<p>Помилка: ${err.message}</p>`;
         } finally {
             disabledInputs.forEach(input => input.disabled = true);
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            }
         }
     });
 

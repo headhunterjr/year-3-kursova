@@ -1,17 +1,33 @@
 ﻿@{
     ViewData["Title"] = "Алгоритми для графів";
 }
-
-<div class="text-left">
-    <ul>
-        <li>
-            <a asp-controller="Problem" asp-action="Dijkstra">Алгоритм Дейкстри</a>
-        </li>
-        <li>
-            <a asp-controller="Problem" asp-action="Floyd">Алгоритм Флойда-Воршалла</a>
-        </li>
-        <li>
-            <a asp-controller="Problem" asp-action="Prim">Алгоритм Прима</a>
-        </li>
-    </ul>
+<div class="home-container">
+    <section class="content-area">
+        <h2 class="welcome-title">Ласкаво просимо!</h2>
+        <p class="welcome-text">
+            Цей веб-сайт надає доступ до популярних алгоритмів теорії графів.
+            Ви можете вводити дані вручну або імпортувати їх з Excel-файлу.
+            Виберіть алгоритм зі списку нижче, щоб розпочати роботу.
+        </p>
+        <div class="algorithm-grid">
+            <a asp-controller="Problem" asp-action="Dijkstra" class="algorithm-card">
+                <h3 class="algorithm-title">Алгоритм Дейкстри</h3>
+                <p class="algorithm-description">
+                    Знаходження найкоротших шляхів між вершинами графа
+                </p>
+            </a>
+            <a asp-controller="Problem" asp-action="Floyd" class="algorithm-card">
+                <h3 class="algorithm-title">Алгоритм Флойда-Воршалла</h3>
+                <p class="algorithm-description">
+                    Пошук найкоротших шляхів між усіма парами вершин
+                </p>
+            </a>
+            <a asp-controller="Problem" asp-action="Prim" class="algorithm-card">
+                <h3 class="algorithm-title">Алгоритм Прима</h3>
+                <p class="algorithm-description">
+                    Побудова мінімального кістякового дерева
+                </p>
+            </a>
+        </div>
+    </section>
 </div>

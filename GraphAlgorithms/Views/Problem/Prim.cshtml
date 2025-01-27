@@ -1,9 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Алгоритм Прима";
 }
-
-<div class="text-center">
+<div class="algorithm-page">
     <h1 class="algorithm-title">Алгоритм Прима</h1>
+
     <select id="inputMethod">
         <option value="" disabled selected>Оберіть спосіб задання графу</option>
         <option value="excel">Завантажити таблицю</option>
@@ -25,13 +25,15 @@
     </form>
 
     <div id="manualMatrixForm" style="display: none;">
-        <label for="matrixSize">Кількість вершин графа:</label>
-        <input type="number" id="matrixSize" name="matrixSize" min="1" required />
-        <button id="generateMatrix">Створити матрицю</button>
+        <div class="form-group">
+            <label class="form-label" for="matrixSize">Кількість вершин графа:</label>
+            <input type="number" id="matrixSize" name="matrixSize" min="1" required />
+            <button id="generateMatrix">Створити матрицю</button>
+        </div>
 
         <form id="manualForm" asp-action="SolvePrimManual" method="post" style="display: none;">
             <div id="matrixInputs"></div>
-            <div>
+            <div class="form-group">
                 <label class="form-label" for="sourceVertexManual">Початкова вершина:</label>
                 <input type="number" id="sourceVertexManual" name="sourceVertex" min="0" required class="form-control" />
             </div>
@@ -41,5 +43,4 @@
 
     <div id="result"></div>
 </div>
-
 <script src="~/js/prim.js"></script>
