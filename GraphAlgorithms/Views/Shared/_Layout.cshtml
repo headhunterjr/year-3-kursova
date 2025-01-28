@@ -16,10 +16,42 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+            @if (Context.Request.Path.StartsWithSegments("/Problem"))
+            {
+                <div class="main-grid">
+                    <aside class="sidebar">
+                        <h2 class="sidebar-title">Алгоритми</h2>
+                        <nav>
+                            <ul class="nav-list">
+                                <li class="nav-item">
+                                    <a asp-controller="Problem" asp-action="Dijkstra" class="nav-link">
+                                        Алгоритм Дейкстри
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Problem" asp-action="Floyd" class="nav-link">
+                                        Алгоритм Флойда-Воршалла
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Problem" asp-action="Prim" class="nav-link">
+                                        Алгоритм Прима
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </aside>
+                    <div class="content-area">
+                        @RenderBody()
+                    </div>
+                </div>
+            }
+            else
+            {
+                @RenderBody()
+            }
         </main>
     </div>
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

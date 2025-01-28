@@ -38,11 +38,11 @@
                 renderMatrix(matrix);
             } else {
                 const error = await response.text();
-                resultDiv.innerHTML = `<p>Помилка: ${error}</p>`;
+                resultDiv.innerHTML = `<p>${error}</p>`;
             }
         } catch (err) {
             console.error('JavaScript error:', err);
-            resultDiv.innerHTML = `<p>Помилка: ${err.message}</p>`;
+            resultDiv.innerHTML = `<p>${err.message}</p>`;
         } finally {
             if (submitButton) {
                 submitButton.disabled = false;
@@ -114,11 +114,11 @@
             } else {
                 const error = await response.text();
                 console.error("Server Error Response:", error);
-                resultDiv.innerHTML = `<p>Помилка: ${error}</p>`;
+                resultDiv.innerHTML = `<p>${error}</p>`;
             }
         } catch (err) {
             console.error('JavaScript error:', err);
-            resultDiv.innerHTML = `<p>Помилка: ${err.message}</p>`;
+            resultDiv.innerHTML = `<p>${err.message}</p>`;
         } finally {
             disabledInputs.forEach(input => input.disabled = true);
             if (submitButton) {

@@ -38,11 +38,11 @@
                 renderDistances(distances);
             } else {
                 const error = await response.text();
-                resultDiv.innerHTML = `<p>Помилка: ${error}</p>`;
+                resultDiv.innerHTML = `<p>${error}</p>`;
             }
         } catch (err) {
             console.error('JavaScript error:', err);
-            resultDiv.innerHTML = `<p>Помилка: ${err.message}</p>`;
+            resultDiv.innerHTML = `<p>${err.message}</p>`;
         } finally {
             if (submitButton) {
                 submitButton.disabled = false;
@@ -132,11 +132,11 @@
             } else {
                 const error = await response.text();
                 console.error("Server Error Response:", error);
-                resultDiv.innerHTML = `<p>Помилка: ${error}</p>`;
+                resultDiv.innerHTML = `<p>${error}</p>`;
             }
         } catch (err) {
             console.error('JavaScript error:', err);
-            resultDiv.innerHTML = `<p>Помилка: ${err.message}</p>`;
+            resultDiv.innerHTML = `<p>${err.message}</p>`;
         } finally {
             disabledInputs.forEach(input => input.disabled = true);
             if (submitButton) {
@@ -152,12 +152,33 @@
             return;
         }
 
-        let html = `<h3>Найкоротші шляхи від початкової вершини:</h3>`;
-        html += `<ul>`;
+        let html = `
+        <div class="dijkstra-results-container">
+            <h3 class="dijkstra-results-title">Найкоротші шляхи від початкової вершини</h3>
+            <table class="dijkstra-results-table">
+                <thead>
+                    <tr>
+                        <th>Кінцева вершина</th>
+                        <th>Найкоротша відстань</th>
+                    </tr>
+                </thead>
+                <tbody>
+    `;
+
         distances.forEach((distance, vertex) => {
-            html += `<li>До вершини ${vertex}: ${distance}</li>`;
+            html += `
+            <tr>
+                <td>${vertex}</td>
+                <td>${distance}</td>
+            </tr>
+        `;
         });
-        html += `</ul>`;
+
+        html += `
+                </tbody>
+            </table>
+        </div>
+    `;
 
         resultDiv.innerHTML = html;
     }

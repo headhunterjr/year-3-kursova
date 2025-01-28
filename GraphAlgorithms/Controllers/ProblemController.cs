@@ -20,11 +20,6 @@ namespace GraphAlgorithms.Controllers
             _problemRepository = problemRepository ?? throw new ArgumentNullException(nameof(problemRepository));
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         [HttpPost]
         public async Task<IActionResult> SolveDijkstra(IFormFile excelFile, int sourceVertex)
         {
@@ -60,6 +55,10 @@ namespace GraphAlgorithms.Controllers
                 }
             }
             catch (FormatException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -102,6 +101,10 @@ namespace GraphAlgorithms.Controllers
                 }
             }
             catch (FormatException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -209,9 +212,9 @@ namespace GraphAlgorithms.Controllers
                     throw new InvalidOperationException("Недійсні дані.");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(500, $"Сталася помилка: {ex.Message}");
+                return StatusCode(500, $"Сталася помилка. Перевірте дані та спробуйте ще раз.");
             }
         }
 
@@ -258,9 +261,9 @@ namespace GraphAlgorithms.Controllers
                     throw new InvalidOperationException("Недійсні дані.");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(500, $"Сталася помилка: {ex.Message}");
+                return StatusCode(500, $"Сталася помилка. Перевірте дані та спробуйте ще раз.");
             }
         }
 
@@ -315,9 +318,9 @@ namespace GraphAlgorithms.Controllers
                     throw new InvalidOperationException("Недійсні дані.");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(500, $"Сталася помилка: {ex.Message}");
+                return StatusCode(500, $"Сталася помилка. Перевірте дані та спробуйте ще раз.");
             }
         }
 

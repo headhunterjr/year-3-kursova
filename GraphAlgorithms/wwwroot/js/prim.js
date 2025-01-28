@@ -38,11 +38,11 @@
                 renderResult(data);
             } else {
                 const error = await response.text();
-                resultDiv.innerHTML = `<p>Error: ${error}</p>`;
+                resultDiv.innerHTML = `<p>${error}</p>`;
             }
         } catch (err) {
             console.error('JavaScript error:', err);
-            resultDiv.innerHTML = `<p>Error: ${err.message}</p>`;
+            resultDiv.innerHTML = `<p>${err.message}</p>`;
         } finally {
             if (submitButton) {
                 submitButton.disabled = false;
@@ -129,11 +129,11 @@
             } else {
                 const error = await response.text();
                 console.error("Server Error Response:", error);
-                resultDiv.innerHTML = `<p>Помилка: ${error}</p>`;
+                resultDiv.innerHTML = `<p>${error}</p>`;
             }
         } catch (err) {
             console.error('JavaScript error:', err);
-            resultDiv.innerHTML = `<p>Помилка: ${err.message}</p>`;
+            resultDiv.innerHTML = `<p>${err.message}</p>`;
         } finally {
             if (submitButton) {
                 submitButton.disabled = false;
