@@ -513,9 +513,9 @@ a {
 
 .prim-results-container {
     max-width: 100%;
-    overflow-x: auto; /* Enables horizontal scrolling */
+    overflow-x: auto;
     padding: 10px;
-    background: #fff; /* Ensures proper background */
+    background: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -534,14 +534,14 @@ a {
     border: 1px solid #ccc;
     padding: 8px;
     text-align: center;
-    white-space: nowrap; /* Prevents columns from squeezing too much */
+    white-space: nowrap;
 }
 
 .prim-results-table-container {
     max-width: 100%;
-    overflow-x: auto; /* Enables scrolling */
-    border: 1px solid #ddd; /* Keeps it inside a frame */
-    background: white; /* Ensures consistent background */
+    overflow-x: auto;
+    border: 1px solid #ddd;
+    background: white;
 }
 
 .prim-results-edges {

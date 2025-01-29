@@ -145,7 +145,7 @@
                         <tr>
                             <th>${rowIndex}</th>
                             ${row.map(cell => `
-                                <td>${cell >= infinity ? '&#8212;' : cell}</td>`).join('')}
+                                <td>${cell >= infinity ? ' ' : cell}</td>`).join('')}
                         </tr>
                     `).join('')}
                 </tbody>
