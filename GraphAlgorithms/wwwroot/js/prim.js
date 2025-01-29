@@ -54,7 +54,7 @@
     generateMatrixBtn.addEventListener('click', (event) => {
         event.preventDefault();
         const size = parseInt(matrixSizeInput.value);
-        if (isNaN(size) || size <= 0) {
+        if (isNaN(size) || size <= 1) {
             alert('Будь ласка, введіть дійсну кількість вершин.');
             return;
         }
@@ -150,39 +150,66 @@
 
         const mstEdges = new Set(data.mstEdges.map(edge => `${edge.source}-${edge.destination}`));
 
-        let tableHtml = "<table border='1' style='border-collapse: collapse; width: 100%;'>";
-        const matrix = data.originalMatrix;
+        let html = `
+<div class="prim-results-container">
+    <h3 class="prim-results-title">Мінімальне кісткове дерево</h3>
+    <div class="prim-results-table-container">
+        <table class="prim-results-table">
+            <thead>
+                <tr>
+                    <th>Вершини</th>
+                    ${data.originalMatrix[0].map((_, index) => `<th>${index}</th>`).join('')}
+                </tr>
+            </thead>
+            <tbody>
+`;
 
-        tableHtml += "<tr><th style='border: 1px solid black; padding: 5px;'>Вершини</th>";
-        for (let i = 0; i < matrix.length; i++) {
-            tableHtml += `<th style="border: 1px solid black; padding: 5px;">${i}</th>`;
-        }
-        tableHtml += "</tr>";
-
-        for (let i = 0; i < matrix.length; i++) {
-            tableHtml += `<tr><th style="border: 1px solid black; padding: 5px;">${i}</th>`;
-            for (let j = 0; j < matrix[i].length; j++) {
-                const weight = matrix[i][j];
+        for (let i = 0; i < data.originalMatrix.length; i++) {
+            html += `<tr><th>${i}</th>`;
+            for (let j = 0; j < data.originalMatrix[i].length; j++) {
+                const weight = data.originalMatrix[i][j];
                 const edgeKey = `${i}-${j}`;
                 const isHighlighted = mstEdges.has(edgeKey);
-                const cellStyle = isHighlighted ? "background-color: red;" : "";
                 const displayValue = weight && weight < 1000000 ? weight : "";
-                tableHtml += `<td style="border: 1px solid black; padding: 5px; text-align: center; ${cellStyle}">${displayValue}</td>`;
+                html += `<td class="${isHighlighted ? "highlight" : ""}">${displayValue}</td>`;
             }
-            tableHtml += "</tr>";
+            html += `</tr>`;
         }
-        tableHtml += "</table>";
 
-        let edgesHtml = "<h3>Ребра мінімального кісткового дерева:</h3><ul>";
+        html += `
+            </tbody>
+        </table>
+    </div>
+    
+    <h3 class="prim-results-title">Ребра MST</h3>
+    <div class="dijkstra-results-table-container">
+        <table class="dijkstra-results-table">
+            <thead>
+                <tr>
+                    <th>Початкова вершина</th>
+                    <th>Кінцева вершина</th>
+                    <th>Вага</th>
+                </tr>
+            </thead>
+            <tbody>
+`;
+
         data.mstEdges.forEach(edge => {
-            edgesHtml += `<li>Від ${edge.source} до ${edge.destination} (Вага: ${edge.weight})</li>`;
+            html += `
+            <tr>
+                <td>${edge.source}</td>
+                <td>${edge.destination}</td>
+                <td>${edge.weight}</td>
+            </tr>`;
         });
-        edgesHtml += "</ul>";
 
-        resultDiv.innerHTML = `
-        <h3>Виділені ребра входять до мінімального кісткового дерева:</h3>
-        ${tableHtml}
-        ${edgesHtml}
-    `;
+        html += `
+            </tbody>
+        </table>
+    </div>
+</div>`;
+
+        resultDiv.innerHTML = html;
     }
+
 });

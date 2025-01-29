@@ -54,7 +54,7 @@
     generateMatrixBtn.addEventListener('click', (event) => {
         event.preventDefault();
         const size = parseInt(matrixSizeInput.value);
-        if (isNaN(size) || size <= 0) {
+        if (isNaN(size) || size <= 1) {
             alert('Введіть дійсну розмірність матриці.');
             return;
         }
@@ -130,25 +130,28 @@
 
     function renderMatrix(matrix) {
         const infinity = 10e8;
-        let tableHtml = `<table class="result-table" style="border-collapse: collapse; text-align: center;">`;
-        tableHtml += `
-        <thead>
-            <tr>
-                <th>Вершини</th>
-                ${matrix[0].map((_, index) => `<th>${index}</th>`).join('')}
-            </tr>
-        </thead>`;
-        tableHtml += `
-        <tbody>
-            ${matrix.map((row, rowIndex) => `
-                <tr>
-                    <th>${rowIndex}</th>
-                    ${row.map(cell => `
-                        <td>${cell > infinity ? '' : cell}</td>`).join('')}
-                </tr>
-            `).join('')}
-        </tbody>`;
-        tableHtml += `</table>`;
-        resultDiv.innerHTML = tableHtml;
+        let html = `
+        <div class="floyd-results-container">
+            <h3 class="floyd-results-title">Матриця найкоротших шляхів</h3>
+            <table class="floyd-results-table">
+                <thead>
+                    <tr>
+                        <th>Вершини</th>
+                        ${matrix[0].map((_, index) => `<th>${index}</th>`).join('')}
+                    </tr>
+                </thead>
+                <tbody>
+                    ${matrix.map((row, rowIndex) => `
+                        <tr>
+                            <th>${rowIndex}</th>
+                            ${row.map(cell => `
+                                <td>${cell >= infinity ? '&#8212;' : cell}</td>`).join('')}
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+    `;
+        resultDiv.innerHTML = html;
     }
 });

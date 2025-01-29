@@ -227,13 +227,14 @@ a {
 
 .form-control {
     width: 100%;
-    max-width: 400px;
+    max-width: 100px;
     padding: 0.5rem;
     border: 1px solid var(--border-light);
     border-radius: 0.375rem;
     background-color: white;
     margin: 0 auto; 
     display: block;
+    text-align: center;
 }
 
 .file-upload {
@@ -242,11 +243,17 @@ a {
 }
 
     .file-upload input[type="file"] {
-        width: 100%;
-        max-width: 400px;
-        margin: 0 auto;
+        width: auto;
+        max-width: 100%;
+        padding: 0.5rem;
+        border: 1px solid var(--border-light);
+        border-radius: 0.375rem;
+        background-color: white;
         display: block;
+        margin: 0 auto;
+        cursor: pointer;
     }
+
 
 #manualMatrixForm {
     margin-top: 2rem;
@@ -310,6 +317,23 @@ a {
     .btn-primary:disabled {
         opacity: 0.7;
         cursor: not-allowed;
+    }
+
+.btn-secondary {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--light-blue);
+    color: var(--primary-blue);
+    border: 1px solid var(--border-light);
+    border-radius: 0.375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .btn-secondary:hover {
+        background-color: var(--bg-light);
+        border-color: var(--primary-blue);
     }
 
 #generateMatrix {
@@ -439,3 +463,97 @@ a {
             color: var(--primary-blue);
             font-weight: 500;
         }
+
+.dijkstra-results-table-container {
+    max-width: 100%;
+    overflow-x: auto;
+    border: 1px solid #ddd;
+    background: white;
+}
+
+.floyd-results-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+}
+
+.floyd-results-title {
+    color: var(--text-dark);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.floyd-results-table th {
+    background-color: var(--bg-light);
+    color: var(--text-medium);
+    font-weight: 600;
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid var(--border-light);
+}
+
+.floyd-results-table td {
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid var(--border-light);
+    color: var(--primary-blue);
+    font-weight: 500;
+}
+
+    .floyd-results-table td:empty {
+        background-color: var(--bg-light);
+    }
+
+.prim-results-container {
+    max-width: 100%;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    padding: 10px;
+    background: #fff; /* Ensures proper background */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.prim-results-title {
+    color: var(--text-dark);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.prim-results-table th, .prim-results-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+    white-space: nowrap; /* Prevents columns from squeezing too much */
+}
+
+.prim-results-table-container {
+    max-width: 100%;
+    overflow-x: auto; /* Enables scrolling */
+    border: 1px solid #ddd; /* Keeps it inside a frame */
+    background: white; /* Ensures consistent background */
+}
+
+.prim-results-edges {
+    list-style-type: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 1rem auto;
+    text-align: left;
+}
+
+    .prim-results-edges li {
+        padding: 0.5rem 0;
+        color: var(--text-medium);
+        font-weight: 500;
+    }

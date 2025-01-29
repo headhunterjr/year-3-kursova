@@ -54,7 +54,7 @@
     generateMatrixBtn.addEventListener('click', (event) => {
         event.preventDefault();
         const size = parseInt(matrixSizeInput.value);
-        if (isNaN(size) || size <= 0) {
+        if (isNaN(size) || size <= 1) {
             alert('Введіть дійсну розмірність матриці.');
             return;
         }
