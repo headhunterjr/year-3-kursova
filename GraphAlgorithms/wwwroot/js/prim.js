@@ -15,6 +15,11 @@
         manualMatrixForm.style.display = method === 'manual' ? 'block' : 'none';
     });
 
+    document.querySelector('input[type="file"]').addEventListener('change', function (e) {
+        const fileName = e.target.files[0]?.name || 'Файл не обрано';
+        document.querySelector('.file-name').textContent = fileName;
+    });
+
     excelForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
@@ -150,40 +155,58 @@
 
         const mstEdges = new Set(data.mstEdges.map(edge => `${edge.source}-${edge.destination}`));
 
-        let tableHtml = "<table border='1' style='border-collapse: collapse; width: 100%;'>";
-        const matrix = data.originalMatrix;
+        let html = `
+        <div class="prim-results-container">
+            <div class="prim-results-title">Результати алгоритму Прима</div>
+            
+            <div class="prim-results-table-container">
+                <table class="floyd-results-table">
+                    <thead>
+                        <tr>
+                            <th>Вершини</th>
+                            ${data.originalMatrix[0].map((_, i) => `<th>${i}</th>`).join('')}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.originalMatrix.map((row, i) => `
+                            <tr>
+                                <th>${i}</th>
+                                ${row.map((weight, j) => {
+            const edgeKey = `${i}-${j}`;
+            const isHighlighted = mstEdges.has(edgeKey);
+            const displayValue = weight && weight < 1000000 ? weight : ' ';
+            return `<td style="${isHighlighted ? 'background-color: var(--red-highlight); color: white;' : ''}">${displayValue}</td>`;
+        }).join('')}
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
 
-        tableHtml += "<tr><th style='border: 1px solid black; padding: 5px;'>Вершини</th>";
-        for (let i = 0; i < matrix.length; i++) {
-            tableHtml += `<th style="border: 1px solid black; padding: 5px;">${i}</th>`;
-        }
-        tableHtml += "</tr>";
+            <!-- MST Edges Table -->
+            <div class="dijkstra-results-container" style="margin-top: 2rem;">
+                <h3 class="dijkstra-results-title">Ребра мінімального кісткового дерева</h3>
+                <table class="dijkstra-results-table">
+                    <thead>
+                        <tr>
+                            <th>Початкова вершина</th>
+                            <th>Кінцева вершина</th>
+                            <th>Вага</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.mstEdges.map(edge => `
+                            <tr>
+                                <td>${edge.source}</td>
+                                <td>${edge.destination}</td>
+                                <td>${edge.weight}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>`;
 
-        for (let i = 0; i < matrix.length; i++) {
-            tableHtml += `<tr><th style="border: 1px solid black; padding: 5px;">${i}</th>`;
-            for (let j = 0; j < matrix[i].length; j++) {
-                const weight = matrix[i][j];
-                const edgeKey = `${i}-${j}`;
-                const isHighlighted = mstEdges.has(edgeKey);
-                const cellStyle = isHighlighted ? "background-color: red;" : "";
-                const displayValue = weight && weight < 1000000 ? weight : "";
-                tableHtml += `<td style="border: 1px solid black; padding: 5px; text-align: center; ${cellStyle}">${displayValue}</td>`;
-            }
-            tableHtml += "</tr>";
-        }
-        tableHtml += "</table>";
-
-        let edgesHtml = "<h3>Ребра мінімального кісткового дерева:</h3><ul>";
-        data.mstEdges.forEach(edge => {
-            edgesHtml += `<li>Від ${edge.source} до ${edge.destination} (Вага: ${edge.weight})</li>`;
-        });
-        edgesHtml += "</ul>";
-
-        resultDiv.innerHTML = `
-        <h3>Виділені ребра входять до мінімального кісткового дерева:</h3>
-        ${tableHtml}
-        ${edgesHtml}
-    `;
+        resultDiv.innerHTML = html;
     }
-
 });

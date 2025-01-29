@@ -149,7 +149,7 @@ namespace GraphAlgorithms.Controllers
                         Source = edge.Item1,
                         Destination = edge.Item2,
                         Weight = edge.Item3
-                    }).ToList();
+                    }).OrderBy(edge => edge.Source).ToList();
 
                     return Ok(new { originalMatrix = matrix, mstEdges });
                 }
@@ -309,7 +309,7 @@ namespace GraphAlgorithms.Controllers
                         Source = edge.Item1,
                         Destination = edge.Item2,
                         Weight = edge.Item3
-                    }).ToList();
+                    }).OrderBy(edge => edge.Source).ToList();
 
                     return Ok(new { originalMatrix = matrix, mstEdges });
                 }

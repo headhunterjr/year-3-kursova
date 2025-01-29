@@ -15,6 +15,11 @@
         manualMatrixForm.style.display = method === 'manual' ? 'block' : 'none';
     });
 
+    document.querySelector('input[type="file"]').addEventListener('change', function (e) {
+        const fileName = e.target.files[0]?.name || 'Файл не обрано';
+        document.querySelector('.file-name').textContent = fileName;
+    });
+
     excelForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 

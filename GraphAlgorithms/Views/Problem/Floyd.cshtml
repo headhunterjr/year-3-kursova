@@ -9,18 +9,19 @@
         <option value="manual">Ввести матрицю суміжності вручну</option>
     </select>
     <form id="excelForm" asp-action="SolveFloyd" method="post" enctype="multipart/form-data" style="display: none;">
-        <div class="form-group">
-            <label class="form-label" for="excelFile">Обрати файл:</label>
-            <div class="file-upload">
-                <input type="file" id="excelFile" name="excelFile" accept=".xlsx" class="form-control" />
-            </div>
+        <div class="file-upload">
+            <label for="excelFile" class="file-upload-label">
+                Обрати файл
+                <input type="file" id="excelFile" name="excelFile" accept=".xlsx" />
+            </label>
+            <div class="file-name"></div>
         </div>
         <button type="submit" class="btn-primary">Завантажити та розв'язати</button>
     </form>
     <div id="manualMatrixForm" style="display: none;">
         <div class="form-group">
             <label class="form-label" for="matrixSize">Кількість вершин графа:</label>
-            <input type="number" id="matrixSize" name="matrixSize" min="2" required />
+            <input type="number" id="matrixSize" name="matrixSize" min="2" required class="form-control" />
             <button class="btn-secondary" id="generateMatrix">Створити матрицю</button>
         </div>
         <form id="manualForm" asp-action="SolveFloydManual" method="post" style="display: none;">
