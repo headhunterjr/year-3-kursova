@@ -23,6 +23,7 @@ body {
     background-color: var(--bg-light);
     color: var(--text-dark);
     overflow-x: auto;
+    min-width: min-content;
 }
 
 a {
@@ -40,6 +41,7 @@ a {
     margin: 0 auto;
     padding: 0 2rem;
     min-width: min-content;
+    width: 100%;
 }
 
 .home-container {
@@ -54,11 +56,15 @@ a {
     padding: 1rem 2rem;
     margin-bottom: 2rem;
     width: 100%;
+    min-width: min-content;
+    top: 0;
+    z-index: 1000;
 }
 
 .header-content {
     max-width: 1200px;
     margin: 0 auto;
+    min-width: min-content;
 }
 
 .site-title {
@@ -74,6 +80,7 @@ a {
     grid-template-columns: 250px 1fr;
     gap: 2rem;
     margin-top: 2rem;
+    min-width: min-content;
 }
 
 @media (max-width: 1200px) {
@@ -138,6 +145,8 @@ a {
     border-radius: 0.5rem;
     padding: 2rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    min-width: min-content;
+    overflow-x: auto;
 }
 
 .welcome-title {
@@ -469,13 +478,6 @@ a {
         color: var(--text-medium);
     }
 
-.site-title {
-    text-decoration: none;
-    color: var(--text-dark);
-    font-weight: 700;
-    font-size: 1.5rem;
-}
-
     .site-title:hover {
         text-decoration: none;
         color: var(--text-dark);
@@ -534,12 +536,14 @@ a {
 }
 
 .floyd-results-container {
-    max-width: 800px;
+    max-width: none;
     margin: 2rem auto;
     background: white;
     border-radius: 0.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 1.5rem;
+    overflow-x: auto;
+    min-width: min-content;
 }
 
 .floyd-results-title {

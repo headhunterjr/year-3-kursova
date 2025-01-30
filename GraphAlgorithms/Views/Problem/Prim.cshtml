@@ -1,47 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Алгоритм Прима";
+    ViewData["SolveAction"] = "SolvePrim";
+    ViewData["SolveManualAction"] = "SolvePrimManual";
+    ViewData["RequiresSourceVertex"] = true;
 }
+
 <div class="algorithm-page">
     <h1 class="algorithm-title">Алгоритм Прима</h1>
-
-    <select id="inputMethod">
-        <option value="" disabled selected>Оберіть спосіб задання графу</option>
-        <option value="excel">Завантажити таблицю</option>
-        <option value="manual">Ввести матрицю суміжності вручну</option>
-    </select>
-
-    <form id="excelForm" asp-action="SolvePrim" method="post" enctype="multipart/form-data" style="display: none;">
-        <div class="file-upload">
-            <label for="excelFile" class="file-upload-label">
-                Обрати файл
-                <input type="file" id="excelFile" name="excelFile" accept=".xlsx" />
-            </label>
-            <div class="file-name"></div>
-        </div>
-        <div class="form-group">
-            <label class="form-label" for="sourceVertexFile">Початкова вершина:</label>
-            <input type="number" id="sourceVertexFile" name="sourceVertex" min="0" required class="form-control" />
-        </div>
-        <button type="submit" class="btn-primary">Завантажити та розв'язати</button>
-    </form>
-
-    <div id="manualMatrixForm" style="display: none;">
-        <div class="form-group">
-            <label class="form-label" for="matrixSize">Кількість вершин графа:</label>
-            <input type="number" id="matrixSize" name="matrixSize" min="2" required class="form-control" />
-            <button class="btn-secondary" id="generateMatrix">Створити матрицю</button>
-        </div>
-
-        <form id="manualForm" asp-action="SolvePrimManual" method="post" style="display: none;">
-            <div id="matrixInputs"></div>
-            <div class="form-group">
-                <label class="form-label" for="sourceVertexManual">Початкова вершина:</label>
-                <input type="number" id="sourceVertexManual" name="sourceVertex" min="0" required class="form-control" />
-            </div>
-            <button type="submit" class="btn-primary">Обчислити</button>
-        </form>
-    </div>
-
-    <div id="result"></div>
+    @await Html.PartialAsync("_AlgorithmInputForm")
 </div>
+
 <script src="~/js/prim.js"></script>
