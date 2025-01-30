@@ -23,7 +23,6 @@ body {
     background-color: var(--bg-light);
     color: var(--text-dark);
     overflow-x: auto;
-    min-width: min-content;
 }
 
 a {
@@ -37,7 +36,7 @@ a {
     }
 
 .container {
-    max-width: 1400px;
+    max-width: 95%;
     margin: 0 auto;
     padding: 0 2rem;
     min-width: min-content;
@@ -56,15 +55,11 @@ a {
     padding: 1rem 2rem;
     margin-bottom: 2rem;
     width: 100%;
-    min-width: min-content;
-    top: 0;
-    z-index: 1000;
 }
 
 .header-content {
     max-width: 1200px;
     margin: 0 auto;
-    min-width: min-content;
 }
 
 .site-title {
@@ -160,6 +155,7 @@ a {
     color: var(--text-medium);
     margin-bottom: 2rem;
     line-height: 1.6;
+    font-size: 1.2rem;
 }
 
 .algorithm-grid {
@@ -286,6 +282,7 @@ a {
     background-color: var(--bg-light);
     border-radius: 0.5rem;
     border: 1px solid var(--border-light);
+    max-width: 1000px;
 }
 
     .algorithm-description h2 {
@@ -294,16 +291,11 @@ a {
         margin-bottom: 1rem;
     }
 
-    .algorithm-description h3 {
-        font-size: 1.1rem;
-        color: var(--text-dark);
-        margin: 1rem 0;
-    }
-
     .algorithm-description p {
         color: var(--text-medium);
         line-height: 1.6;
         margin-bottom: 1rem;
+        font-size: 1.05rem;
     }
 
     .algorithm-description ol {
