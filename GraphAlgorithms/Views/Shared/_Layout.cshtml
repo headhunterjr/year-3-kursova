@@ -9,11 +9,7 @@
     <link rel="stylesheet" href="~/GraphAlgorithms.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header class="header">
-        <div class="header-content">
-            <a class="site-title" asp-controller="Home" asp-action="Index">Алгоритми для графів</a>
-        </div>
-    </header>
+    <a class="static-text" asp-controller="Home" asp-action="Index">Алгоритми для графів</a>
     <div class="container">
         <main role="main" class="pb-3">
             @if (Context.Request.Path.StartsWithSegments("/Problem"))
