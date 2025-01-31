@@ -412,12 +412,9 @@ a {
     display: inline-block;
 }
 
-.matrix-input-table, .dijkstra-results-table, .floyd-results-table, .prim-results-table {
+.matrix-input-table {
     border-collapse: collapse;
     background-color: white;
-}
-
-.matrix-input-table {
     margin: 2rem auto;
 }
 
@@ -510,6 +507,51 @@ a {
     padding: 10px;
 }
 
+.dijkstra-results-table,
+.floyd-results-table,
+.prim-results-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border-light);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+    .dijkstra-results-table thead tr,
+    .floyd-results-table thead tr,
+    .prim-results-table thead tr {
+        background-color: var(--light-teal);
+        color: var(--primary-teal);
+        font-weight: 600;
+    }
+
+    .dijkstra-results-table th,
+    .floyd-results-table th,
+    .prim-results-table th {
+        padding: 1rem;
+        text-align: center;
+        border-bottom: 2px solid var(--medium-teal);
+        white-space: nowrap;
+    }
+
+    .dijkstra-results-table td,
+    .floyd-results-table td,
+    .prim-results-table td {
+        padding: 0.875rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid var(--border-light);
+        transition: background-color 0.2s ease;
+    }
+
+    .dijkstra-results-table tbody tr:hover,
+    .floyd-results-table tbody tr:hover,
+    .prim-results-table tbody tr:hover {
+        background-color: var(--bg-light);
+    }
+
 .dijkstra-results-title,
 .floyd-results-title,
 .prim-results-title {
@@ -533,6 +575,7 @@ a {
 .dijkstra-results-table td:last-child {
     color: var(--primary-teal);
     font-weight: 600;
+    background-color: var(--light-teal);
 }
 
 .floyd-results-table td {
@@ -561,6 +604,31 @@ a {
         font-weight: 500;
     }
 
+.prim-highlight {
+    background-color: var(--red-highlight) !important;
+    color: white !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.results-container-base {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    margin: 2rem auto;
+}
+
+    .results-container-base h3 {
+        color: var(--primary-teal);
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--light-teal);
+        text-align: center;
+    }
+
 .text-primary {
     color: var(--primary-teal);
 }
@@ -582,5 +650,19 @@ a {
 
     .sidebar {
         margin-bottom: 2rem;
+    }
+
+    .dijkstra-results-table,
+    .floyd-results-table,
+    .prim-results-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .results-container-base {
+        padding: 1rem;
+        margin: 1rem -1rem;
+        border-radius: 0;
     }
 }

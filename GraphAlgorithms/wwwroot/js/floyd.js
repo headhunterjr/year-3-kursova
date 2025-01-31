@@ -2,7 +2,7 @@
     renderResult(matrix) {
         const infinity = 10e8;
         this.elements.resultDiv.innerHTML = `
-            <div class="floyd-results-container">
+            <div class="results-container-base">
                 <h3 class="floyd-results-title">Матриця найкоротших шляхів</h3>
                 <table class="floyd-results-table">
                     <thead>

@@ -28,7 +28,7 @@
         }
 
         this.elements.resultDiv.innerHTML = `
-            <div class="dijkstra-results-container">
+            <div class="results-container-base">
                 <h3 class="dijkstra-results-title">Найкоротші шляхи від початкової вершини</h3>
                 <table class="dijkstra-results-table">
                     <thead>

@@ -48,7 +48,7 @@
             const edgeKey = `${i}-${j}`;
             const isHighlighted = mstEdges.has(edgeKey);
             const displayValue = weight && weight < 1000000 ? weight : ' ';
-            return `<td style="${isHighlighted ? 'background-color: var(--red-highlight); color: white;' : ''}">${displayValue}</td>`;
+                                        return `<td style="${isHighlighted ? 'prim-highlight' : ''}">${displayValue}</td>`;
         }).join('')}
                                 </tr>
                             `).join('')}
@@ -56,9 +56,9 @@
                     </table>
                 </div>
 
-                <div class="dijkstra-results-container" style="margin-top: 2rem;">
-                    <h3 class="dijkstra-results-title">Ребра мінімального каркаса</h3>
-                    <table class="dijkstra-results-table">
+                <div class="results-container-base" style="margin-top: 2rem;">
+                    <h3 class="prim-results-title">Ребра мінімального каркаса</h3>
+                    <table class="prim-results-table">
                         <thead>
                             <tr>
                                 <th>Початкова вершина</th>
