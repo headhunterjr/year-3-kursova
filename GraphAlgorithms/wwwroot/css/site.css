@@ -144,7 +144,7 @@ a {
 
 .home-algorithm-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(275px, 350px));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
     gap: 1.5rem;
     margin-top: 2rem;
     justify-content: center;
@@ -157,7 +157,7 @@ a {
     border-radius: 0.5rem;
     transition: all 0.2s ease;
     height: 100%;
-    min-width: 275px;
+    min-width: 300px;
     max-width: 350px;
     width: 100%;
 }
