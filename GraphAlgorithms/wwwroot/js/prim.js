@@ -33,7 +33,7 @@
                 <div class="prim-results-title">Результати алгоритму Прима</div>
                 
                 <div class="prim-results-table-container">
-                    <table class="floyd-results-table">
+                    <table class="prim-results-table">
                         <thead>
                             <tr>
                                 <th>Вершини</th>
@@ -48,7 +48,7 @@
             const edgeKey = `${i}-${j}`;
             const isHighlighted = mstEdges.has(edgeKey);
             const displayValue = weight && weight < 1000000 ? weight : ' ';
-                                        return `<td style="${isHighlighted ? 'prim-highlight' : ''}">${displayValue}</td>`;
+                                        return `<td class="${isHighlighted ? 'prim-highlight' : ''}">${displayValue}</td>`;
         }).join('')}
                                 </tr>
                             `).join('')}
@@ -58,7 +58,7 @@
 
                 <div class="results-container-base" style="margin-top: 2rem;">
                     <h3 class="prim-results-title">Ребра мінімального каркаса</h3>
-                    <table class="prim-results-table">
+                    <table class="dijkstra-results-table">
                         <thead>
                             <tr>
                                 <th>Початкова вершина</th>
