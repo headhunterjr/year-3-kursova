@@ -1,5 +1,6 @@
 using GraphAlgorithms.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace GraphAlgorithms
 {
@@ -15,8 +16,12 @@ namespace GraphAlgorithms
                {
                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                });
-            string connectionString = Environment.GetEnvironmentVariable("DATABASE_URL")
-                ?? throw new InvalidOperationException("Connection string not found");
+            var host = Environment.GetEnvironmentVariable("PGHOST");
+            var port = Environment.GetEnvironmentVariable("PGPORT");
+            var database = Environment.GetEnvironmentVariable("PGDATABASE");
+            var username = Environment.GetEnvironmentVariable("PGUSER");
+            var password = Environment.GetEnvironmentVariable("PGPASSWORD");
+            string connectionString = $"Host={host};Port={port};Database={database};Username={username};Password={password};";
             builder.Services.AddDbContext<ProblemDbContext>(options => options.UseNpgsql(connectionString));
             builder.Services.AddScoped<IProblemRepository, ProblemRepository>();
 
