@@ -15,7 +15,7 @@ namespace GraphAlgorithms
                {
                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                });
-            string connectionString = builder.Configuration.GetConnectionString("DatabaseConnection")
+            string connectionString = Environment.GetEnvironmentVariable("DATABASE_URL")
                 ?? throw new InvalidOperationException("Connection string not found");
             builder.Services.AddDbContext<ProblemDbContext>(options => options.UseNpgsql(connectionString));
             builder.Services.AddScoped<IProblemRepository, ProblemRepository>();
@@ -40,6 +40,12 @@ namespace GraphAlgorithms
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<ProblemDbContext>();
+                db.Database.Migrate();
+            }
 
             app.Run();
         }
