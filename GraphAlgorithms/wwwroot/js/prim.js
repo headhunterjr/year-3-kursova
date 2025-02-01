@@ -33,7 +33,7 @@
                 <div class="prim-results-title">Результати алгоритму Прима</div>
                 
                 <div class="prim-results-table-container">
-                    <table class="prim-results-table">
+                    <table class="floyd-results-table">
                         <thead>
                             <tr>
                                 <th>Вершини</th>

@@ -423,9 +423,7 @@ a {
     .dijkstra-results-table th,
     .dijkstra-results-table td,
     .floyd-results-table th,
-    .floyd-results-table td,
-    .prim-results-table th,
-    .prim-results-table td {
+    .floyd-results-table td {
         border: 1px solid var(--border-light);
         padding: 0.5rem;
         text-align: center;
@@ -433,8 +431,7 @@ a {
 
     .matrix-input-table th,
     .dijkstra-results-table th,
-    .floyd-results-table th,
-    .prim-results-table th {
+    .floyd-results-table th {
         background-color: var(--bg-light);
         color: var(--text-medium);
         font-weight: 600;
@@ -508,8 +505,7 @@ a {
 }
 
 .dijkstra-results-table,
-.floyd-results-table,
-.prim-results-table {
+.floyd-results-table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
@@ -521,16 +517,14 @@ a {
 }
 
     .dijkstra-results-table thead tr,
-    .floyd-results-table thead tr,
-    .prim-results-table thead tr {
+    .floyd-results-table thead tr {
         background-color: var(--light-teal);
         color: var(--primary-teal);
         font-weight: 600;
     }
 
     .dijkstra-results-table th,
-    .floyd-results-table th,
-    .prim-results-table th {
+    .floyd-results-table th {
         padding: 1rem;
         text-align: center;
         border-bottom: 2px solid var(--medium-teal);
@@ -538,8 +532,7 @@ a {
     }
 
     .dijkstra-results-table td,
-    .floyd-results-table td,
-    .prim-results-table td {
+    .floyd-results-table td {
         padding: 0.875rem 1rem;
         text-align: center;
         border-bottom: 1px solid var(--border-light);
@@ -547,8 +540,7 @@ a {
     }
 
     .dijkstra-results-table tbody tr:hover,
-    .floyd-results-table tbody tr:hover,
-    .prim-results-table tbody tr:hover {
+    .floyd-results-table tbody tr:hover {
         background-color: var(--bg-light);
     }
 
@@ -653,8 +645,7 @@ a {
     }
 
     .dijkstra-results-table,
-    .floyd-results-table,
-    .prim-results-table {
+    .floyd-results-table {
         display: block;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
