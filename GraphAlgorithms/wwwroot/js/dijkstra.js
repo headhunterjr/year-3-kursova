@@ -30,22 +30,24 @@
         this.elements.resultDiv.innerHTML = `
             <div class="results-container-base">
                 <h3 class="dijkstra-results-title">Найкоротші шляхи від початкової вершини</h3>
-                <table class="dijkstra-results-table">
-                    <thead>
-                        <tr>
-                            <th>Кінцева вершина</th>
-                            <th>Найкоротша відстань</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${distances.map((distance, vertex) => `
+                <div class="dijkstra-results-table-container">
+                    <table class="dijkstra-results-table">
+                        <thead>
                             <tr>
-                                <td>${vertex}</td>
-                                <td>${distance}</td>
+                                <th>Кінцева вершина</th>
+                                <th>Найкоротша відстань</th>
                             </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            ${distances.map((distance, vertex) => `
+                                <tr>
+                                    <td>${vertex}</td>
+                                    <td>${distance}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
             </div>`;
     }
 }

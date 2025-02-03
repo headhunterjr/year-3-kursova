@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="LCCZ9R1wlvikEL8XjydVInILd3q8QkX3qVk1mBVpOvM" />
+    <meta name="description" content="Калькулятор популярних алгоритмів теорії графів: алгоритму Дейкстри, Флойда-Воршалла, Прима. Завантажуйте Excel-таблиці або вводьте матриці суміжності вручну."/>
     <title>@ViewData["Title"] - Алгоритми графів</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -21,17 +22,20 @@
                         <nav>
                             <ul class="nav-list">
                                 <li class="nav-item">
-                                    <a asp-controller="Problem" asp-action="Dijkstra" class="nav-link">
+                                    <a asp-controller="Problem" asp-action="Dijkstra"
+                                       class="nav-link @(Context.Request.Path.StartsWithSegments("/Problem/Dijkstra") ? "active" : "")">
                                         Алгоритм Дейкстри
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-controller="Problem" asp-action="Floyd" class="nav-link">
+                                    <a asp-controller="Problem" asp-action="Floyd"
+                                       class="nav-link @(Context.Request.Path.StartsWithSegments("/Problem/Floyd") ? "active" : "")">
                                         Алгоритм Флойда-Воршалла
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-controller="Problem" asp-action="Prim" class="nav-link">
+                                    <a asp-controller="Problem" asp-action="Prim"
+                                       class="nav-link @(Context.Request.Path.StartsWithSegments("/Problem/Prim") ? "active" : "")">
                                         Алгоритм Прима
                                     </a>
                                 </li>

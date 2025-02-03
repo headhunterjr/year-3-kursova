@@ -37,9 +37,13 @@
     handleGenerateMatrix(event) {
         event.preventDefault();
         const size = parseInt(this.elements.matrixSizeInput.value);
-
+        console.log(size);
         if (isNaN(size) || size <= 1) {
             alert('Введіть дійсну розмірність матриці.');
+            return;
+        }
+        if (size > 100) {
+            alert('Розмір матриці не може перевищувати 100х100.');
             return;
         }
 

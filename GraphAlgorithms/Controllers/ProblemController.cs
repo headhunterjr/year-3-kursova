@@ -58,6 +58,10 @@ namespace GraphAlgorithms.Controllers
             {
                 return BadRequest(ex.Message);
             }
+            catch (ArgumentOutOfRangeException)
+            {
+                return BadRequest("Розмірність матриці не може перевищувати 100х100.");
+            }
             catch (InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
@@ -103,6 +107,10 @@ namespace GraphAlgorithms.Controllers
             catch (FormatException ex)
             {
                 return BadRequest(ex.Message);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return BadRequest("Розмірність матриці не може перевищувати 100х100.");
             }
             catch (InvalidOperationException ex)
             {
@@ -161,6 +169,10 @@ namespace GraphAlgorithms.Controllers
             catch (FormatException ex)
             {
                 return BadRequest(ex.Message);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return BadRequest("Розмірність матриці не може перевищувати 100х100.");
             }
             catch (InvalidOperationException ex)
             {
