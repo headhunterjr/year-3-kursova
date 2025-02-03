@@ -5,6 +5,7 @@
         public static bool ValidateUndirectedGraph(int[,] graph)
         {
             if (graph.GetLength(0) != graph.GetLength(1)) return false;
+            if (graph.GetLength(0) > 100) throw new ArgumentOutOfRangeException();
             for (int i = 0; i < graph.GetLength(0); ++i)
             {
                 if (graph[i, i] != 0) return false;
@@ -19,6 +20,7 @@
         public static bool ValidateDirectedGraph(int[,] graph)
         {
             if (graph.GetLength(0) != graph.GetLength(1)) return false;
+            if (graph.GetLength(0) > 100) throw new ArgumentOutOfRangeException();
             for (int i = 0; i < graph.GetLength(0); ++i)
             {
                 if (graph[i, i] != 0) return false;

@@ -141,6 +141,11 @@ a {
         background-color: var(--light-teal);
         color: var(--primary-teal);
     }
+    .nav-link.active {
+        background-color: var(--light-teal);
+        color: var(--primary-teal);
+        font-weight: 600;
+    }
 
 .home-algorithm-grid {
     display: grid;
@@ -216,14 +221,15 @@ a {
         font-size: 1.05rem;
     }
 
-    .algorithm-description ol {
+    .algorithm-description ul {
         color: var(--text-medium);
         padding-left: 1.5rem;
     }
 
-    .algorithm-description li {
-        margin-bottom: 0.5rem;
-    }
+        .algorithm-description ul li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
 
 .welcome-text {
     color: var(--text-medium);
@@ -557,12 +563,22 @@ a {
 }
 
 .dijkstra-results-table-container,
-.prim-results-table-container {
+.prim-results-table-container,
+.floyd-results-table-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
     max-width: 100%;
     overflow-x: auto;
     border: 1px solid #ddd;
     background: white;
 }
+    .prim-results-table-container .floyd-results-table,
+    .prim-results-table-container .dijkstra-results-table,
+    .floyd-results-table-container .floyd-results-table,
+    .dijkstra-results-table-container .dijkstra-results-table {
+        margin: 0 auto;
+    }
 
 .dijkstra-results-table td:last-child {
     color: var(--primary-teal);

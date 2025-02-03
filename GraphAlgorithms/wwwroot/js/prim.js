@@ -58,24 +58,26 @@
 
                 <div class="results-container-base" style="margin-top: 2rem;">
                     <h3 class="prim-results-title">Ребра мінімального каркаса</h3>
-                    <table class="dijkstra-results-table">
-                        <thead>
-                            <tr>
-                                <th>Початкова вершина</th>
-                                <th>Кінцева вершина</th>
-                                <th>Вага</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${data.mstEdges.map(edge => `
+                    <div class="prim-results-table-container">
+                        <table class="dijkstra-results-table">
+                            <thead>
                                 <tr>
-                                    <td>${edge.source}</td>
-                                    <td>${edge.destination}</td>
-                                    <td>${edge.weight}</td>
+                                    <th>Початкова вершина</th>
+                                    <th>Кінцева вершина</th>
+                                    <th>Вага</th>
                                 </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                ${data.mstEdges.map(edge => `
+                                    <tr>
+                                        <td>${edge.source}</td>
+                                        <td>${edge.destination}</td>
+                                        <td>${edge.weight}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>`;
     }
