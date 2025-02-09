@@ -55,29 +55,29 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
 
-                <div class="results-container-base" style="margin-top: 2rem;">
-                    <h3 class="prim-results-title">Ребра мінімального каркаса</h3>
-                    <div class="prim-results-table-container">
-                        <table class="dijkstra-results-table">
-                            <thead>
+            <div class="prim-results-container" style="margin-top: 4rem;">
+                <h3 class="prim-results-title">Ребра мінімального каркаса</h3>
+                <div class="prim-results-table-container">
+                    <table class="dijkstra-results-table">
+                        <thead>
+                            <tr>
+                                <th>Початкова вершина</th>
+                                <th>Кінцева вершина</th>
+                                <th>Вага</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.mstEdges.map(edge => `
                                 <tr>
-                                    <th>Початкова вершина</th>
-                                    <th>Кінцева вершина</th>
-                                    <th>Вага</th>
+                                    <td>${edge.source}</td>
+                                    <td>${edge.destination}</td>
+                                    <td>${edge.weight}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                ${data.mstEdges.map(edge => `
-                                    <tr>
-                                        <td>${edge.source}</td>
-                                        <td>${edge.destination}</td>
-                                        <td>${edge.weight}</td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
+                            `).join('')}
+                        </tbody>
+                    </table>
                 </div>
             </div>`;
     }
