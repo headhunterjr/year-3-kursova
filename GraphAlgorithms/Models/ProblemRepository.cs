@@ -130,10 +130,6 @@ namespace GraphAlgorithms.Models
         }
         public List<(int, int, int)> Prim(int[,] graph, int sourceVertex)
         {
-            if (!Validation.ValidateConnectedGraph(graph))
-            {
-                throw new InvalidOperationException("Graph not fully connected, MST cannot be built.");
-            }
             int verticesCount = graph.GetLength(0);
             bool[] visited = new bool[verticesCount];
             int[] keys = new int[verticesCount];

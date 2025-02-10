@@ -26,6 +26,7 @@
             this.elements.resultDiv.innerHTML = '<p>Помилка: отримано недійсні дані.</p>';
             return;
         }
+        const infinity = 1e8;
 
         const mstEdges = new Set(data.mstEdges.map(edge => `${edge.source}-${edge.destination}`));
         this.elements.resultDiv.innerHTML = `
@@ -47,7 +48,7 @@
                                     ${row.map((weight, j) => {
             const edgeKey = `${i}-${j}`;
             const isHighlighted = mstEdges.has(edgeKey);
-            const displayValue = weight && weight < 1000000 ? weight : ' ';
+            const displayValue = weight && weight < infinity ? weight : ' ';
                                         return `<td class="${isHighlighted ? 'prim-highlight' : ''}">${displayValue}</td>`;
         }).join('')}
                                 </tr>

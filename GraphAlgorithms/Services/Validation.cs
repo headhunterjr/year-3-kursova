@@ -38,7 +38,7 @@
                 visited[vertex] = true;
                 for (int i = 0; i < verticesCount; i++)
                 {
-                    if (graph[vertex, i] != 0 && !visited[i])
+                    if (graph[vertex, i] != 0 && graph[vertex, i] <= 1e6 && !visited[i])
                     {
                         DFS(i);
                     }

@@ -139,7 +139,7 @@ namespace GraphAlgorithms.Controllers
                 {
                     return BadRequest("Введіть дійсну початкову вершину.");
                 }
-                if (Validation.ValidateUndirectedGraph(matrix))
+                if (Validation.ValidateConnectedGraph(matrix) && Validation.ValidateUndirectedGraph(matrix))
                 {
                     List<(int, int, int)> result = _problemRepository.Prim(matrix, sourceVertex);
                     Problem problem = new Problem
@@ -303,7 +303,7 @@ namespace GraphAlgorithms.Controllers
                     }
                 }
 
-                if (Validation.ValidateUndirectedGraph(processedMatrix))
+                if (Validation.ValidateConnectedGraph(processedMatrix) && Validation.ValidateUndirectedGraph(processedMatrix))
                 {
                     List<(int, int, int)> result = _problemRepository.Prim(processedMatrix, sourceVertex);
                     Problem problem = new Problem

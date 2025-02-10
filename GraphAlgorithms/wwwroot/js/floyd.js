@@ -1,6 +1,6 @@
 ﻿class FloydApp extends BaseGraphApp {
     renderResult(matrix) {
-        const infinity = 10e8;
+        const infinity = 1e8;
         this.elements.resultDiv.innerHTML = `
             <div class="results-container-base">
                 <h3 class="floyd-results-title">Матриця найкоротших шляхів</h3>

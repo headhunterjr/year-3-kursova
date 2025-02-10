@@ -26,29 +26,33 @@
             this.elements.resultDiv.innerHTML = '<p>Помилка: отримано недійсні дані.</p>';
             return;
         }
+        const infinity = 1e8;
 
         this.elements.resultDiv.innerHTML = `
-            <div class="results-container-base">
-                <h3 class="dijkstra-results-title">Найкоротші шляхи від початкової вершини</h3>
-                <div class="dijkstra-results-table-container">
-                    <table class="dijkstra-results-table">
-                        <thead>
-                            <tr>
-                                <th>Кінцева вершина</th>
-                                <th>Найкоротша відстань</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${distances.map((distance, vertex) => `
-                                <tr>
-                                    <td>${vertex}</td>
-                                    <td>${distance}</td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                </div>
-            </div>`;
+        <div class="results-container-base">
+            <h3 class="dijkstra-results-title">Найкоротші шляхи від початкової вершини</h3>
+            <div class="dijkstra-results-table-container">
+                <table class="dijkstra-results-table">
+                    <thead>
+                        <tr>
+                            <th>Кінцева вершина</th>
+                            <th>Найкоротша відстань</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${distances.map((distance, vertex) => {
+                            const displayValue = distance && distance < infinity ? distance : ' ';
+                            return `
+                                                <tr>
+                                                    <td>${vertex}</td>
+                                                    <td>${displayValue}</td>
+                                                </tr>
+                                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>`;
     }
 }
 
