@@ -46,11 +46,11 @@
                                 <tr>
                                     <th>${i}</th>
                                     ${row.map((weight, j) => {
-            const edgeKey = `${i}-${j}`;
-            const isHighlighted = mstEdges.has(edgeKey);
-            const displayValue = weight && weight < infinity ? weight : ' ';
+                                        const edgeKey = `${i}-${j}`;
+                                        const isHighlighted = mstEdges.has(edgeKey);
+                                        const displayValue = weight && weight < infinity ? weight : ' ';
                                         return `<td class="${isHighlighted ? 'prim-highlight' : ''}">${displayValue}</td>`;
-        }).join('')}
+                                    }).join('')}
                                 </tr>
                             `).join('')}
                         </tbody>

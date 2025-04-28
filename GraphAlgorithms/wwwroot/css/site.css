@@ -141,30 +141,24 @@ a {
         background-color: var(--light-teal);
         color: var(--primary-teal);
     }
+
     .nav-link.active {
         background-color: var(--light-teal);
         color: var(--primary-teal);
         font-weight: 600;
     }
 
-.home-algorithm-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
-    gap: 1.5rem;
-    margin-top: 2rem;
-    justify-content: center;
-}
-
 .home-algorithm-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: var(--bg-light);
-    border: 1px solid transparent;
     padding: 1.5rem;
     border-radius: 0.5rem;
     transition: all 0.2s ease;
     height: 100%;
-    min-width: 300px;
-    max-width: 350px;
     width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
     .home-algorithm-card:hover {
@@ -172,6 +166,13 @@ a {
         transform: translateY(-2px);
         box-shadow: 0 4px 6px rgba(0, 96, 96, 0.1);
     }
+
+.home-algorithm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
 
 .algorithm-title, .home-algorithm-title {
     font-size: 1.5rem;
@@ -564,7 +565,7 @@ a {
 
 .dijkstra-results-table-container,
 .prim-results-table-container,
-.floyd-results-table-container{
+.floyd-results-table-container {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -573,12 +574,13 @@ a {
     border: 1px solid #ddd;
     background: white;
 }
-    .prim-results-table-container .floyd-results-table,
-    .prim-results-table-container .dijkstra-results-table,
-    .floyd-results-table-container .floyd-results-table,
-    .dijkstra-results-table-container .dijkstra-results-table {
-        margin: 0 auto;
-    }
+
+.prim-results-table-container .floyd-results-table,
+.prim-results-table-container .dijkstra-results-table,
+.floyd-results-table-container .floyd-results-table,
+.dijkstra-results-table-container .dijkstra-results-table {
+    margin: 0 auto;
+}
 
 .dijkstra-results-table td:last-child {
     color: var(--primary-teal);
@@ -671,5 +673,47 @@ a {
         padding: 1rem;
         margin: 1rem -1rem;
         border-radius: 0;
+    }
+
+
+    .home-container {
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    .welcome-text {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+
+    .home-algorithm-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .home-algorithm-card {
+        max-width: 100%;
+        min-width: 100%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 16px;
+    }
+
+    .home-content-area {
+        padding: 1.25rem;
+    }
+
+    .welcome-text {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .home-algorithm-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
