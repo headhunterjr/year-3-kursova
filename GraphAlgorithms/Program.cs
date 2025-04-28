@@ -16,12 +16,8 @@ namespace GraphAlgorithms
                {
                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                });
-            var host = Environment.GetEnvironmentVariable("PGHOST");
-            var port = Environment.GetEnvironmentVariable("PGPORT");
-            var database = Environment.GetEnvironmentVariable("PGDATABASE");
-            var username = Environment.GetEnvironmentVariable("PGUSER");
-            var password = Environment.GetEnvironmentVariable("PGPASSWORD");
-            string connectionString = $"Host={host};Port={port};Database={database};Username={username};Password={password};";
+            string connectionString = builder.Configuration.GetConnectionString("DatabaseConnection") ?? 
+                throw new InvalidOperationException("Connection string not found.");
             builder.Services.AddDbContext<ProblemDbContext>(options => options.UseNpgsql(connectionString));
             builder.Services.AddScoped<IProblemRepository, ProblemRepository>();
 
